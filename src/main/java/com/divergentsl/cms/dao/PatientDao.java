@@ -7,26 +7,44 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.divergentsl.cms.databaseconnection.IDatabaseManager;
 import com.divergentsl.cms.dto.PatientDto;
 
-
+/**
+ * Class for Patient Dao
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Repository
 public class PatientDao {
+	
+	@Autowired
+	IDatabaseManager databaseManager;
 
-	IDatabaseManager DatabaseManager;
 
-	public PatientDao(IDatabaseManager DatabaseManager) {
-		this.DatabaseManager = DatabaseManager;
-	}
 
-	// add
+	/**
+	 *  This method insert the patient
+	 * @param pid
+	 * @param pname
+	 * @param paddress
+	 * @param pcontactnumber
+	 * @param page
+	 * @param pweight
+	 * @return It return 1 if patient successfully added otherwise it returns 0 
+	 * @throws SQLException
+	 */
 	public int addPatient(String pid, String pname, String paddress, String pcontactnumber, String page, String pweight)
 			throws SQLException {
 
 		Connection con = null;
 		Statement st = null;
 
-		con = DatabaseManager.getConnection();
+		con = databaseManager.getConnection();
 		st = con.createStatement();
 
 		return st.executeUpdate("insert into patient values ('" + pid + "','" + pname + "','" + paddress + "','"
@@ -34,37 +52,56 @@ public class PatientDao {
 
 	}
 
-	// delete
+	/**
+	 * This method delete the doctor
+	 * @param pid
+	 * @return It return 1 if patient successfully added otherwise it returns 0
+	 * @throws SQLException
+	 */
 	public int deletePatient(String pid) throws SQLException {
 
 		Connection con = null;
 		Statement st = null;
 
-		con = DatabaseManager.getConnection();
+		con = databaseManager.getConnection();
 		st = con.createStatement();
 
 		return st.executeUpdate("delete from patient where pid='" + pid + "'");
 	}
 
-	// update
+	/**
+	 * This method update the patient of given id
+	 * @param pid
+	 * @param pname
+	 * @param paddress
+	 * @param pcontactnumber
+	 * @param page
+	 * @param pweight
+	 * @return It return 1 if patient successfully updated otherwise it returns 0
+	 * @throws SQLException
+	 */
 	public int updatePatient(String pid, String pname, String paddress, String pcontactnumber, String page,
 			String pweight) throws SQLException {
 		Connection con = null;
 		Statement st = null;
 
-		con = DatabaseManager.getConnection();
+		con = databaseManager.getConnection();
 		st = con.createStatement();
 		return st.executeUpdate("update patient set pname='" + pname + "',paddress='" + paddress + "',pcontactnumber='"
 				+ pcontactnumber + "',page='" + page + "',pweight='" + pweight + "' where pid='" + pid + "' ");
 
 	}
 
-	// list of patients
+	/**
+	 * This method shows the list of patient 
+	 * @return It returns the list of patient 
+	 * @throws SQLException
+	 */
 	public List<PatientDto> listPatient() throws SQLException {
 		Connection con = null;
 		Statement st = null;
 
-		con = DatabaseManager.getConnection();
+		con = databaseManager.getConnection();
 		st = con.createStatement();
 		ResultSet rs = st.executeQuery("select * from patient ");
 		List<PatientDto> patientDtos = new ArrayList<PatientDto>();

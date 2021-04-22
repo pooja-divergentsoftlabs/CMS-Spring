@@ -7,25 +7,30 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.divergentsl.cms.dao.AppointmentDao;
 import com.divergentsl.cms.databaseconnection.DatabaseManager;
 import com.divergentsl.cms.dto.AppointmentDto;
 
-
+/**
+ * Class for CRUD Appointment
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class CRUDAppointment {
 	public static final Logger myLogger=Logger.getLogger("com.mycompany.myapp");
 	
-	private static AppointmentDao appointmentdao;
+	@Autowired
+	private AppointmentDao appointmentdao;
 	
-	static {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-		appointmentdao=context.getBean("appointmentdao",AppointmentDao.class);
-	}
+	
 
-	public static void crudAppointment() {
+	public void crudAppointment() {
 
 		exit: while (true) {
 			
@@ -64,8 +69,10 @@ public class CRUDAppointment {
 		}
 	}
 
-	// add patient
-	public static void addAppointment() {
+	/**
+	 * method for inserting the appointment
+	 */
+	public void addAppointment() {
 		
 		System.out.println("----Add Appointment-----");
 		Scanner sc = new Scanner(System.in);
@@ -94,8 +101,10 @@ public class CRUDAppointment {
 
 	}
 
-	// delete
-	public static void deleteAppointment() {
+	/**
+	 * method for deleting the the appointment
+	 */
+	public void deleteAppointment() {
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -113,8 +122,10 @@ public class CRUDAppointment {
 		}
 	}
 
-	// update
-	public static void updateAppointment() {
+	/**
+	 * method for updating the appointment
+	 */
+	public void updateAppointment() {
 
 		Scanner sc = new Scanner(System.in);
 	
@@ -141,8 +152,10 @@ public class CRUDAppointment {
 
 	}
 
-	// list of lab test
-	public static void listAppointment() {
+	/**
+	 * method for showing the list of the appointment
+	 */
+	public void listAppointment() {
 	
 		System.out.println("----List of Appointment----");
 		try {

@@ -9,10 +9,26 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Class for Login Page
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class LoginPage {
 	public static final Logger myLogger = Logger.getLogger("com.mycompany.myapp");
+	
+	
+	@Autowired
+	AdminPanel adminPanel;
+	@Autowired
+	DoctorLogin doctorLogin;
 
-	public static void loginPage() {
+	public void loginPage() {
 
 		exit: while (true) {
 		
@@ -31,7 +47,7 @@ public class LoginPage {
 
 			case 1:
 				if(adminLogin()) {
-				AdminPanel.adminPanel();
+				adminPanel.adminPanel();
 				}
 				else {
 					myLogger.log(Level.INFO,"Wrong id/password");
@@ -41,7 +57,7 @@ public class LoginPage {
 
 			case 2:
 				if(doctorLogin()) {
-					DoctorLogin.doctorPanel();
+					doctorLogin.doctorPanel();
 				}else {
 					myLogger.log(Level.INFO,"Wrong id/password");
 					//System.out.println("Wrong id/password");
@@ -60,6 +76,7 @@ public class LoginPage {
 			}
 		}
 	}
+	
 	
 	 public static boolean adminLogin(){
 	        Scanner sc = new Scanner(System.in);

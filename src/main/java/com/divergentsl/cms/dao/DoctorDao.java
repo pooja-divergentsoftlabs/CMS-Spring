@@ -7,19 +7,37 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import com.divergentsl.cms.databaseconnection.IDatabaseManager;
 import com.divergentsl.cms.dto.DoctorDto;
 
+/**
+ * Class for DoctorDao
+ * 
+ * @author Pooja Patidar
+ *
+ */
 
+@Repository
 public class DoctorDao {
 
+	@Autowired
 	IDatabaseManager databaseManager;
 
-	public DoctorDao(IDatabaseManager databaseManager) {
-		this.databaseManager = databaseManager;
-	}
 
-	// add
+	/**
+	 * This method insert the doctor
+	 * @param did
+	 * @param dname
+	 * @param dspeciality
+	 * @param dcontactnumber
+	 * @param dfees
+	 * @return It return 1 if doctor successfully added otherwise it returns 0 
+	 * @throws SQLException
+	 */
 	public int addDoctor(String did, String dname, String dspeciality, String dcontactnumber, String dfees)
 			throws SQLException {
 
@@ -34,7 +52,12 @@ public class DoctorDao {
 
 	}
 
-	// delete
+	/**
+	 * This method delete the doctor
+	 * @param did
+	 * @return It return 1 if doctor successfully added otherwise it returns 0 
+	 * @throws SQLException
+	 */
 	public int deleteDoctor(String did) throws SQLException {
 
 		Connection con = null;
@@ -47,7 +70,16 @@ public class DoctorDao {
 
 	}
 
-	// update
+	/**
+	 * This method update the doctor of given id
+	 * @param did
+	 * @param dname
+	 * @param dspeciality
+	 * @param dcontactnumber
+	 * @param dfees
+	 * @return It return 1 if doctor successfully updated otherwise it returns 0
+	 * @throws SQLException
+	 */
 	public int updateDoctor(String did, String dname, String dspeciality, String dcontactnumber, String dfees ) throws SQLException{
 		
 		Connection con = null;
@@ -60,8 +92,11 @@ public class DoctorDao {
 	}
 	
 	
-	//
-	// list of patients
+	/**
+	 * This method shows the list of doctor 
+	 * @return It returns the list of doctor 
+	 * @throws SQLException
+	 */
 	public List<DoctorDto> listDoctor() throws SQLException {
 		Connection con = null;
 		Statement st = null;

@@ -6,27 +6,31 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.divergentsl.cms.dao.DoctorDao;
 import com.divergentsl.cms.databaseconnection.DatabaseManager;
 import com.divergentsl.cms.dto.DoctorDto;
 
-
+/**
+ * Class for CRUD Doctor
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class CRUDDoctor {
 	public static final Logger myLogger = Logger.getLogger("com.mycompany.myapp");
 
+	@Autowired
+	private DoctorDao doctorDao;
 	
-	private static DoctorDao doctordao;
 	
-	static {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-		//doctordao = context.getBean("doctordao", DoctorDao.class);
-		doctordao =(DoctorDao)context.getBean("doctordao");
-	}
 	
-	public static void crudDoctor() {
+	public void crudDoctor() {
 		
 		exit: while (true) {
 			
@@ -40,6 +44,8 @@ public class CRUDDoctor {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter your choice=");
 			int input = sc.nextInt();
+			
+			
 
 			switch (input) {
 			case 1:
@@ -65,11 +71,13 @@ public class CRUDDoctor {
 		}
 	}
 
-	// add
-	public static void addDoctor() {
+	/**
+	 * method for inserting the doctor
+	 */
+	public void addDoctor() {
 		
-		myLogger.log(Level.INFO,"-------Add Doctor-----");
-		//System.out.println("----Add Doctor----");
+		
+		System.out.println("----Add Doctor----");
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Enter id=");
@@ -90,7 +98,7 @@ public class CRUDDoctor {
 //		DoctorDao doctordao = new DoctorDao(new DatabaseManager());
 
 		try {
-			doctordao.addDoctor(did, dname, dspeciality, pcontactnumber, dfees);
+			doctorDao.addDoctor(did, dname, dspeciality, pcontactnumber, dfees);
 			
 			System.out.println("Added Successfully");
 		} catch (SQLException e) {
@@ -99,8 +107,10 @@ public class CRUDDoctor {
 
 	}
 
-	// delete
-	public static void deleteDoctor() {
+	/**
+	 * method for deleting the doctor
+	 */
+	public void deleteDoctor() {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("----Delete Doctor----");
@@ -109,7 +119,7 @@ public class CRUDDoctor {
 
 //		DoctorDao doctordao = new DoctorDao(new DatabaseManager());
 		try {
-			doctordao.deleteDoctor(did);
+			doctorDao.deleteDoctor(did);
 			
 			System.out.println("Deleted Successfully");
 		} catch (SQLException e) {
@@ -118,8 +128,10 @@ public class CRUDDoctor {
 
 	}
 
-	// update
-	public static void updateDoctor() {
+	/**
+	 * method for updating the doctor
+	 */
+	public void updateDoctor() {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("----Update Doctor----");
@@ -136,7 +148,7 @@ public class CRUDDoctor {
 
 //		DoctorDao doctordao = new DoctorDao(new DatabaseManager());
 		try {
-			doctordao.updateDoctor(did, dname, dspeciality, dcontactnumber, dfees);
+			doctorDao.updateDoctor(did, dname, dspeciality, dcontactnumber, dfees);
 			
 			System.out.println("Updated Successfully");
 		} catch (SQLException e) {
@@ -145,14 +157,16 @@ public class CRUDDoctor {
 
 	}
 
-	// list of doctor
-	public static void listDoctor() {
+	/**
+	 * method for showing the list of doctor
+	 */
+	public void listDoctor() {
 		System.out.println("----List of Doctor----");
-		//myLogger.log(Level.INFO,"-------List of Doctor-----");
+		
 
 		try {
 //			DoctorDao doctordao = new DoctorDao(new DatabaseManager());
-			List<DoctorDto> dtos = doctordao.listDoctor();
+			List<DoctorDto> dtos = doctorDao.listDoctor();
 
 			for (DoctorDto doctorDto : dtos) {
 				System.out.printf(" %10s %30s %15s  %20s %20s", doctorDto.getDid(), doctorDto.getDname(),

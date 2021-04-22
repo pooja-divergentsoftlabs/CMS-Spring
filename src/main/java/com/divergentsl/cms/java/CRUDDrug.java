@@ -7,24 +7,29 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.divergentsl.cms.dao.DrugDao;
 import com.divergentsl.cms.databaseconnection.DatabaseManager;
 import com.divergentsl.cms.dto.DrugDto;
 
+/**
+ * Class for CRUD Drug
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class CRUDDrug {
 	public static final Logger myLogger=Logger.getLogger("com.mycompany.myapp");
 	
-	private static DrugDao drugdao;
+	@Autowired
+	private DrugDao drugdao;
 	
-	static {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-		drugdao=context.getBean("drugdao",DrugDao.class);
-	}
-
-	public static void crudDrug() {
+	
+	public void crudDrug() {
 
 		exit: while (true) {
 			System.out.println("-----CRUDDrug----");
@@ -61,8 +66,10 @@ public class CRUDDrug {
 		}
 	}
 
-	// add
-	public static void addDrug() {
+	/**
+	 * method to insert the drug
+	 */
+	public void addDrug() {
 		
 		System.out.println("----Add Drug-----");
 		Scanner sc = new Scanner(System.in);
@@ -93,15 +100,17 @@ public class CRUDDrug {
 
 	}
 
-	// delete
-	public static void deleteDrug() {
+	/**
+	 * method to delete the drug
+	 */
+	public void deleteDrug() {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("-----Delete Drug------");
 		System.out.println("Enter the drug id=");
 		String drugid = sc.nextLine();
 
-		DrugDao drugdao = new DrugDao(new DatabaseManager());
+		//DrugDao drugdao = new DrugDao(new DatabaseManager());
 
 		try {
 			drugdao.deleteDrug(drugid);
@@ -112,8 +121,10 @@ public class CRUDDrug {
 		}
 	}
 
-	// update
-	public static void updateDrug() {
+	/**
+	 * method to update the drug
+	 */
+	public void updateDrug() {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("----Update Drug----");
@@ -140,8 +151,10 @@ public class CRUDDrug {
 
 	}
 
-	// list of drug
-	public static void listDrug() {
+	/**
+	 * method to show the list of drug
+	 */
+	public void listDrug() {
 		
 		System.out.println("----List of Drug----");
 		try {

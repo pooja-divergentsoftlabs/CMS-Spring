@@ -4,6 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
+/**
+ * Class for  H2DatabaseManager
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Repository
 public class H2DatabaseManager implements IDatabaseManager {
 
 	public static String DB_URL = "jdbc:h2:~/test";

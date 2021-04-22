@@ -7,29 +7,25 @@
  http://www.springframework.org/schema/beans/spring-beans.xsd
  http://www.springframework.org/schema/context
  http://www.springframework.org/schema/context/spring-context.xsd">
- 
+ <context:annotation-config />
+
  
  
  	<bean class="com.divergentsl.cms.databaseconnection.DatabaseManager" name="databasemanager" />
  		
  
  	<bean class="com.divergentsl.cms.dao.DoctorDao" name="doctordao">
- 		<constructor-arg ref="databasemanager" />
  	</bean>	
 	
  	<bean class="com.divergentsl.cms.dao.PatientDao" name="patientdao">
- 		<constructor-arg ref="databasemanager" />
  	</bean>	
  	
  	<bean class=" com.divergentsl.cms.dao.AppointmentDao" name="appointmentdao">
- 	<constructor-arg ref="databasemanager" />
  	</bean>
  	
  	<bean class="com.divergentsl.cms.dao.DrugDao" name="drugdao">
- 	<constructor-arg ref="databasemanager"/>
  	</bean>
  	
 	<bean class="com.divergentsl.cms.dao.LabtestDao" name="labtestdao">
-	<constructor-arg ref="databasemanager" />
 	</bean>
 </beans>

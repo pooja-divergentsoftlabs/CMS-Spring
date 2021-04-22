@@ -6,24 +6,29 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.divergentsl.cms.dao.PatientDao;
 import com.divergentsl.cms.databaseconnection.DatabaseManager;
 import com.divergentsl.cms.dto.PatientDto;
 
+/**
+ * Class for CRUDPatient
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class CRUDPatient {
 	public static final Logger myLogger= Logger.getLogger("com.mycompany.myapp");
 	
-	private static PatientDao patientDao;
-	static {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-		patientDao = context.getBean("patientdao",PatientDao.class);
-		
-	}
+	@Autowired
+	private PatientDao patientDao;
+	
 
-	public static void crudPatient() {
+	public void crudPatient() {
 
 		exit: while (true) {
 			
@@ -63,8 +68,10 @@ public class CRUDPatient {
 		}
 	}
 
-	// add patient
-	public static void addPatient() {
+	/**
+	 * method to insert the patient
+	 */
+	public void addPatient() {
 		
 		System.out.println("----Add Patient-----");
 		Scanner sc = new Scanner(System.in);
@@ -97,8 +104,10 @@ public class CRUDPatient {
 
 	}
 
-	// delete
-	public static void deletePatient() {
+	/**
+	 * method to delete the patient
+	 */
+	public void deletePatient() {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("-----Delete Patient------");
@@ -116,8 +125,10 @@ public class CRUDPatient {
 		}
 	}
 
-	// update
-	public static void updatePatient() {
+	/**
+	 * method to update the patient
+	 */
+	public void updatePatient() {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("-----Update Patient------");
@@ -146,8 +157,10 @@ public class CRUDPatient {
 
 	}
 
-	// list of patient
-	public static void listPatient() {
+	/**
+	 * method to list of patient
+	 */
+	public void listPatient() {
 		
 		System.out.println("----List of Patient----");
 		try {

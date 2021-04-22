@@ -5,10 +5,32 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Class for Doctor Login
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class DoctorLogin {
 	public static final Logger myLogger = Logger.getLogger("com.mycompany.myapp");
 
-	public static void doctorPanel() {
+	
+	@Autowired
+	CRUDPatient crudPatient;
+	@Autowired
+	CRUDDoctor crudDoctor;
+	@Autowired
+	CRUDDrug crudDrug;
+	@Autowired
+	CRUDLabtest crudLabtest;
+	@Autowired 
+	CRUDAppointment crudAppointment;
+	
+
+	public void doctorPanel() {
 		
 
 		Scanner sc = new Scanner(System.in);
@@ -28,16 +50,16 @@ public class DoctorLogin {
 
 			switch (input) {
 			case 1:
-				CRUDPatient.listPatient();
+				crudPatient.listPatient();
 				break;
 			case 2:
-				CRUDAppointment.listAppointment();
+				crudAppointment.listAppointment();
 				break;
 			case 3:
-				CRUDLabtest.listLabtest();
+				crudLabtest.listLabtest();
 				break;
 			case 4:
-				CRUDDrug.listDrug();
+				crudDrug.listDrug();
 				break;
 			case 5:
 				break exit;

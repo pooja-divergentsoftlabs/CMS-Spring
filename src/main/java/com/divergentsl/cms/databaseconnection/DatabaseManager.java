@@ -4,6 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Repository;
+
+/**
+ * Class for DatabaseManager for database connection
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Repository
 public class DatabaseManager implements IDatabaseManager {
 
 	static {

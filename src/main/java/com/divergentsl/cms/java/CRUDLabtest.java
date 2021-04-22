@@ -6,23 +6,29 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.divergentsl.cms.dao.LabtestDao;
 import com.divergentsl.cms.databaseconnection.DatabaseManager;
 import com.divergentsl.cms.dto.LabtestDto;
 
+/**
+ * Class for CRUDLabtest
+ * 
+ * @author Pooja Patidar
+ *
+ */
+@Component
 public class CRUDLabtest {
 	public static final Logger myLogger= Logger.getLogger("com.mycompany.myapp");
 	
-	private static LabtestDao labtestdao;
-	static {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-		labtestdao=context.getBean("labtestdao",LabtestDao.class);
-	}
-
-	public static void crudLabtest() {
+	@Autowired
+	private LabtestDao labtestdao;
+	
+	public void crudLabtest() {
 
 		exit: while (true) {
 	
@@ -61,8 +67,10 @@ public class CRUDLabtest {
 		}
 	}
 
-	// add patient
-	public static void addLabtest() {
+	/**
+	 * method to add labtest
+	 */
+	public void addLabtest() {
 		
 		System.out.println("----Add Labtest-----");
 		Scanner sc = new Scanner(System.in);
@@ -91,8 +99,10 @@ public class CRUDLabtest {
 
 	}
 
-	// delete
-	public static void deleteLabtest() {
+	/**
+	 * method to delete the labtest
+	 */
+	public void deleteLabtest() {
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -111,8 +121,10 @@ public class CRUDLabtest {
 		}
 	}
 
-	// update
-	public static void updateLabtest() {
+	/**
+	 * method to update the labtest
+	 */
+	public void updateLabtest() {
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -138,8 +150,10 @@ public class CRUDLabtest {
 
 	}
 
-	// list of lab test
-	public static void listLabtest() {
+	/**
+	 * method to list the labtest
+	 */
+	public void listLabtest() {
 		
 		System.out.println("----List of Labtest----");
 		try {

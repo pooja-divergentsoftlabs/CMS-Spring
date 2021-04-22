@@ -3,6 +3,12 @@ package com.divergentsl.cms.databaseconnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Interface for database connection
+ * 
+ * @author Pooja Patidar
+ *
+ */
 public interface IDatabaseManager {
 	
 	String username = "root";
